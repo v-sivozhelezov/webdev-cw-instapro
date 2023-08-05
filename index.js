@@ -106,11 +106,12 @@ const renderApp = () => {
     });
   }
 
+//Добавление поста на сервер
   if (page === ADD_POSTS_PAGE) {
     return renderAddPostPageComponent({
       appEl,
       token: getToken(),
-    });
+    })
   }
 
   if (page === POSTS_PAGE) {

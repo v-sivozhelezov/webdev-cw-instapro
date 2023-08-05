@@ -4,6 +4,7 @@ import { posts, goToPage } from "../index.js";
 
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
+  //РЕАЛИЗОВАНО
   console.log("Актуальный список постов:", posts);
 
   /**

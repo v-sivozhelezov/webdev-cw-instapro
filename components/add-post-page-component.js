@@ -1,5 +1,6 @@
 import { onAddPostClick } from "../api.js";
-import { getToken } from "../index.js";
+import { getToken, goToPage } from "../index.js";
+import { LOADING_PAGE, POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
@@ -23,7 +24,7 @@ export function renderAddPostPageComponent({ appEl }) {
                       </div>
                       <label>
                       Опишите фотографию:
-                      <textarea class="input textarea" rows="4"></textarea>
+                      <textarea id="description-input" class="input textarea" rows="4"></textarea>
                       </label>                  
                   
                   <button class="button" id="add-button">Опубликовать</button>
@@ -33,11 +34,13 @@ export function renderAddPostPageComponent({ appEl }) {
       </div>    
 `;
 
+
     appEl.innerHTML = appHtml;
 
     const setError = (message) => {
       appEl.querySelector(".form-error").textContent = message;
     };
+    const description = document.getElementById("description-input").value;
 
     renderHeaderComponent({
       element: document.querySelector(".header-container"),
@@ -55,11 +58,19 @@ export function renderAddPostPageComponent({ appEl }) {
     }
 
     document.getElementById("add-button").addEventListener("click", () => {
+      const description = document.getElementById("description-input").value;
       onAddPostClick({
         token: getToken(),
-        description: "Описание картинки",
+        description,
         imageUrl
-      });
+      })
+        .then(() => {
+          goToPage(POSTS_PAGE);
+          console.log('рендерим');
+        });
+
+      goToPage(LOADING_PAGE);
+      console.log('ждем ответа сервера');
     });
   };
 
