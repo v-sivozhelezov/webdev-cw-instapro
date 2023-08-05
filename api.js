@@ -68,3 +68,22 @@ export function uploadImage({ file }) {
     return response.json();
   });
 }
+
+export function onAddPostClick({ token, imageUrl, description }) {
+  console.log('публикация в апи');
+  return fetch(postsHost, {
+    method: "POST",
+    headers: {
+      Authorization: token
+    },
+    body: JSON.stringify({
+      imageUrl,
+      description
+    }),
+  }).then((response) => {
+    if (response.status === 400) {
+      throw new Error("Некорректно введены данные");
+    }
+    return response.json();
+  });
+}
