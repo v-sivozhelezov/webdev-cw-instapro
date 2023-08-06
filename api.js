@@ -87,3 +87,18 @@ export function onAddPostClick({ token, imageUrl, description }) {
     return response.json();
   });
 }
+
+export function likeClick({ isLiked, token, postID }) {
+  const likeURL = isLiked === 'true' ? 'dislike' : 'like';
+  return fetch(postsHost + `/${postID}/${likeURL}`, {
+    method: "POST",
+    headers: {
+      Authorization: token
+    }
+  }).then((response) => {
+    if (response.status === 500) {
+      throw new Error("Пост не найден");
+    }
+    return response.json();
+  });
+}
