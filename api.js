@@ -88,7 +88,7 @@ export function onAddPostClick({ token, imageUrl, description }) {
   });
 }
 
-export function likeClick({ isLiked, token, postID }) {
+export function getLike({ isLiked, token, postID }) {
   const likeURL = isLiked === 'true' ? 'dislike' : 'like';
   return fetch(postsHost + `/${postID}/${likeURL}`, {
     method: "POST",

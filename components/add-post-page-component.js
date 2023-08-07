@@ -40,7 +40,6 @@ export function renderAddPostPageComponent({ appEl }) {
     const setError = (message) => {
       appEl.querySelector(".form-error").textContent = message;
     };
-    const description = document.getElementById("description-input").value;
 
     renderHeaderComponent({
       element: document.querySelector(".header-container"),

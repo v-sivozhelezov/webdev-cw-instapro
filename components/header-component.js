@@ -1,16 +1,24 @@
 import { goToPage, logout, user } from "../index.js";
 import { ADD_POSTS_PAGE, AUTH_PAGE, POSTS_PAGE } from "../routes.js";
 
-export function renderLikeComponent({ element }) {
+export function renderHeaderComponent({ element }) {
   element.innerHTML = `
-        <div class="post-likes">
-            <button data-post-id="${postID}" data-is-liked="${isLiked}" class="like-button">
-              <img src="${isLiked === 'true' ? './assets/images/like-active.svg' : './assets/images/like-not-active.svg'}">
-            </button>
-            <p class="post-likes-text">
-              Нравится: <strong>${post.likes.length}</strong>
-            </p>
-        </div>
+  <div class="page-header">
+      <h1 class="logo">instapro</h1>
+      <button class="header-button add-or-login-button">
+      ${
+        user
+          ? `<div title="Добавить пост" class="add-post-sign"></div>`
+          : "Войти"
+      }
+      </button>
+      ${
+        user
+          ? `<button title="${user.name}" class="header-button logout-button">Выйти</button>`
+          : ""
+      }  
+  </div>
+  
 `;
 
   element
