@@ -4,10 +4,11 @@ import { posts, goToPage, getToken } from "../index.js";
 import { getLike } from "../api.js";
 import { renderLikeComponent } from "./like-component.js";
 
-export const clickLike = (likeButton) => {
+export function clickLike(likeButton) {
   likeButton.addEventListener('click', () => {
-    console.log('вешаем обработчик');
+    console.log(likeButton);
     const postID = likeButton.dataset.postId;
+    console.log(postID);
     getLike({
       isLiked: likeButton.dataset.isLiked,
       token: getToken(),
@@ -62,7 +63,7 @@ export function renderPostsPageComponent({ appEl }) {
         </li>    
       </ul>
     </div>`;
-  })
+  }) .join('');
 
   appEl.innerHTML = appHtml;
 

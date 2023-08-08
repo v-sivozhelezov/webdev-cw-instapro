@@ -11,5 +11,5 @@ export function renderLikeComponent({ element, post }) {
               </p>
           </div>
   `;
-    clickLike(document.querySelector('.like-button'));
+    clickLike(element.querySelector('.like-button'));
 }
