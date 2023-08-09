@@ -3,6 +3,7 @@
 const personalKey = "sivozhelezov";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
+const registerHost = `${baseHost}/api/user`;
 
 export function getPosts({ token }) {
   return fetch(postsHost, {
@@ -25,7 +26,7 @@ export function getPosts({ token }) {
 
 // https://github.com/GlebkaF/webdev-hw-api/blob/main/pages/api/user/README.md#%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F
 export function registerUser({ login, password, name, imageUrl }) {
-  return fetch(baseHost + "/api/user", {
+  return fetch(registerHost, {
     method: "POST",
     body: JSON.stringify({
       login,
@@ -98,6 +99,17 @@ export function getLike({ isLiked, token, postID }) {
   }).then((response) => {
     if (response.status === 500) {
       throw new Error("Пост не найден");
+    }
+    return response.json();
+  });
+}
+
+export function getUserPosts({ userID }) {
+  return fetch(postsHost + `/user-posts/${userID}`, {
+    method: "GET",
+  }).then((response) => {
+    if (response.status === 500) {
+      throw new Error("Пользователь не найден");
     }
     return response.json();
   });

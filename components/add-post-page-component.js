@@ -32,6 +32,7 @@ export function renderAddPostPageComponent({ appEl }) {
             
           </div>
       </div>    
+      
 `;
 
 

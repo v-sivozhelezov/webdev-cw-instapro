@@ -15,6 +15,7 @@ import {
   removeUserFromLocalStorage,
   saveUserToLocalStorage,
 } from "./helpers.js";
+import { renderUserPostsPageComponent } from "./components/user-posts-page-components.js";
 
 export let user = getUserFromLocalStorage();
 export let page = null;
@@ -69,9 +70,8 @@ export const goToPage = (newPage, data) => {
 
     if (newPage === USER_POSTS_PAGE) {
       // TODO: реализовать получение постов юзера из API
-      console.log("Открываю страницу пользователя: ", data.userId);
       page = USER_POSTS_PAGE;
-      posts = [];
+      posts = data.userPosts;
       return renderApp();
     }
 
@@ -107,7 +107,7 @@ const renderApp = () => {
     });
   }
 
-//Добавление поста на сервер
+  //Добавление поста на сервер
   if (page === ADD_POSTS_PAGE) {
     return renderAddPostPageComponent({
       appEl,
@@ -122,9 +122,11 @@ const renderApp = () => {
   }
 
   if (page === USER_POSTS_PAGE) {
+    console.log(posts);
     // TODO: реализовать страницу фотографию пользвателя
-    appEl.innerHTML = "Здесь будет страница фотографий пользователя";
-    return;
+    return renderUserPostsPageComponent({
+      appEl,
+    });
   }
 };
 
