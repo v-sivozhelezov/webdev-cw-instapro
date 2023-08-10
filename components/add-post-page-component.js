@@ -32,7 +32,7 @@ export function renderAddPostPageComponent({ appEl }) {
             
           </div>
       </div>    
-      
+
 `;
 
 
@@ -66,13 +66,11 @@ export function renderAddPostPageComponent({ appEl }) {
       })
         .then(() => {
           goToPage(POSTS_PAGE);
-          console.log('рендерим');
         });
 
       goToPage(LOADING_PAGE);
-      console.log('ждем ответа сервера');
     });
   };
 
   render();
-}
+} 

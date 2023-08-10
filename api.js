@@ -71,7 +71,6 @@ export function uploadImage({ file }) {
 }
 
 export function onAddPostClick({ token, imageUrl, description }) {
-  console.log('публикация в апи');
   return fetch(postsHost, {
     method: "POST",
     headers: {

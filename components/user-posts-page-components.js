@@ -2,8 +2,7 @@ import { USER_POSTS_PAGE, POSTS_PAGE, LOADING_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken } from "../index.js";
 import { getLike, getUserPosts } from "../api.js";
-import { renderLikeComponent } from "./like-component.js";
-
+import { clickLike } from "./posts-page-component.js";
 
 export function renderUserPostsPageComponent({ appEl }) {
     const appHtml =
@@ -43,18 +42,6 @@ appEl.innerHTML = appHtml;
 renderHeaderComponent({
     element: document.querySelector(".header-container"),
 });
-
-for (let userEl of document.querySelectorAll(".post-header")) {
-    userEl.addEventListener("click", () => {
-        goToPage(LOADING_PAGE);
-        getUserPosts({ userID: userEl.dataset.userId })
-            .then((response) => {
-                goToPage(USER_POSTS_PAGE, {
-                    userPosts: response.posts,
-                });
-            })
-    });
-}
 
 for (const likeButton of document.querySelectorAll('.like-button')) {
     clickLike(likeButton);

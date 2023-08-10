@@ -1,14 +1,13 @@
 import { USER_POSTS_PAGE, POSTS_PAGE, LOADING_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, getToken } from "../index.js";
+import { posts, goToPage, getToken, user } from "../index.js";
 import { getLike, getUserPosts } from "../api.js";
 import { renderLikeComponent } from "./like-component.js";
 
 export function clickLike(likeButton) {
   likeButton.addEventListener('click', () => {
-    console.log(likeButton);
+    if (user) {
     const postID = likeButton.dataset.postId;
-    console.log(postID);
     getLike({
       isLiked: likeButton.dataset.isLiked,
       token: getToken(),
@@ -19,15 +18,12 @@ export function clickLike(likeButton) {
           element: likeButton.closest('.post-likes'),
           post: response.post
         });
-      });
+      })
+    } else alert("Лайкать посты могут только авторизованные пользователи");
   })
 };
 
 export function renderPostsPageComponent({ appEl }) {
-  // TODO: реализовать рендер постов из api
-  //РЕАЛИЗОВАНО
-  console.log("Актуальный список постов:", posts);
-
   /**
    * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow

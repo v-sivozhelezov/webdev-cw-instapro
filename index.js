@@ -20,7 +20,6 @@ import { renderUserPostsPageComponent } from "./components/user-posts-page-compo
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
-
 export const getToken = () => {
   const token = user ? `Bearer ${user.token}` : undefined;
   return token;
@@ -31,6 +30,7 @@ export const logout = () => {
   removeUserFromLocalStorage();
   goToPage(POSTS_PAGE);
 };
+
 
 /**
  * Включает страницу приложения
@@ -54,7 +54,6 @@ export const goToPage = (newPage, data) => {
     if (newPage === POSTS_PAGE) {
       page = LOADING_PAGE;
       renderApp();
-      console.log('рендер');
 
       return getPosts({ token: getToken() })
         .then((newPosts) => {
@@ -122,8 +121,6 @@ const renderApp = () => {
   }
 
   if (page === USER_POSTS_PAGE) {
-    console.log(posts);
-    // TODO: реализовать страницу фотографию пользвателя
     return renderUserPostsPageComponent({
       appEl,
     });
