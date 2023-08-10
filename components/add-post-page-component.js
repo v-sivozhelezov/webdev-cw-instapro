@@ -59,6 +59,18 @@ export function renderAddPostPageComponent({ appEl }) {
 
     document.getElementById("add-button").addEventListener("click", () => {
       const description = document.getElementById("description-input").value;
+
+      if(!imageUrl){
+        alert("Не выбрана фотография");
+        return;
+      }
+
+      if(!description){
+        alert("Добавьте описание");
+        return;
+      }
+
+      goToPage(LOADING_PAGE);
       onAddPostClick({
         token: getToken(),
         description,
@@ -66,9 +78,11 @@ export function renderAddPostPageComponent({ appEl }) {
       })
         .then(() => {
           goToPage(POSTS_PAGE);
+        })
+        .catch((error) => {
+          console.warn(error);
+          setError(error.message);
         });
-
-      goToPage(LOADING_PAGE);
     });
   };
 
